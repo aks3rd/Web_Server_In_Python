@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset='utf-8'>
+  <title>My First Web Application </title>
+  <script>
+   function validate(k)
+   {
+    var name=k.nm.value;
+    var error=false;
+    if(name.length==0)
+    {
+     alert("Name Required");
+     error=true;
+     nm.focus();
+     //return false;
+    }
+    var v='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz '
+    var i=0;
+    while(i<name.length)
+    {
+     if(v.indexOf(name.charAt(i))==-1)
+     {
+      alert("Invalid Data In Name");
+      nm.focus();
+      error=true;
+      //return false;
+     }
+     i++;
+    }
+    var genderErrorSection=document.getElementById("genderErrorSection");
+    if(k.fe.checked==false && k.ml.checked==false)
+    {
+     genderErrorSection.innerHTML="Required";
+     error=true;
+     //return false;
+    }
+    else
+    {
+     error=false;
+     genderErrorSection.innerHTML="";
+    }
+    var addressErrorSection=document.getElementById("addressErrorSection");
+    if(k.ad.value.length==0)
+    {
+     addressErrorSection.innerHTML="Required";
+     ad.focus();
+     error=true;
+     //return false;
+    }
+    else
+    {
+     error=false;
+     addressErrorSection.innerHTML="";
+    }
+    var cityErrorSection=document.getElementById("cityErrorSection");
+    if(k.ct.value=='-1')
+    {
+     cityErrorSection.innerHTML="Required";
+     ct.focus();
+     error=true;
+     //return false;
+    }
+    else
+    {
+     error=false;
+     cityErrorSection.innerHTML="";
+    }
+    if(error)
+    {
+     return false;
+    }
+    else
+    {
+     return true;
+    }
+   }
+  </script>
+ </head>
+ <body>
+  <form action='/onecom/dataSavedServlet.py' onsubmit='return validate(this)'>
+   Enter your name :
+   <input type='text' id='nm' name='nm'>
+   <br><br>
+   Select Gender :&nbsp;&nbsp
+   <input type='radio' id='ml' name='gdr' value='M'>Male
+   &nbsp;&nbsp&nbsp;
+   <input type='radio' id='fe' name='gdr' value='F'>Female
+   &nbsp;&nbsp;&nbsp;
+   <span id='genderErrorSection' style='color:red;'></span>
+   <br><br>
+   Is Adult :&nbsp;&nbsp;
+   <input type='checkbox' id='adlt' name='adlt' value='Y'>
+   <br><br>
+   Enter Address :<br>
+   <textarea id='ad' name='ad' rows='10' clos='50'></textarea>
+   &nbsp;&nbsp;&nbsp;
+   <span id='addressErrorSection' style='color:red;'></span>
+   <br><br>
+   Select city :
+   <select id='ct' name='ct'>
+    <option value='-1'>&lt;select city&gt;</option>
+    <option value='101'>Ujjian</option>
+    <option value='102'>Indore</option>
+    <option value='103'>Gao</option>
+   </select>
+   &nbsp;&nbsp;&nbsp;
+   <span id='cityErrorSection' style='color:red;'></span>
+   <br><br>
+   <button type='submit'>Save</button>
+  </form>
+ </body>
+</html>
