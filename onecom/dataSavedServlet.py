@@ -4,30 +4,6 @@ from html.entities import name2codepoint
 #from mysql.connector import MySQLConnection, Error
 #from python_mysql_dbconfig import read_db_config
 import os
-def insert(name,cityCode):
-    query = "INSERT INTO members(name,cityCode) " \
-            "VALUES(%s,%s)"
-    args = (name, cityCode)
- 
-    try:
-        db_config = read_db_config()
-        conn = MySQLConnection(**db_config)
- 
-        cursor = conn.cursor()
-        cursor.execute(query, args)
- 
-        if cursor.lastrowid:
-            print('last insert id', cursor.lastrowid)
-        else:
-            print('last insert id not found')
- 
-        conn.commit()
-    except Error as error:
-        print(error)
- 
-    finally:
-        cursor.close()
-        conn.close()
 
 class MyHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -79,7 +55,8 @@ class RequestHandler:
   print("Adult Status : %s"%adult)
   print("Address : %s"%address)
   print("City : %s"%city)
-  #insert(name,int(city))
+  
+
   fname="test.html"
   html=open(fname,"w")
   html.write("""<!doctype html><html><head>""")
